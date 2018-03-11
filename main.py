@@ -16,11 +16,9 @@ import sys
 NUMBER_OF_CONCURRENT_TASKS_WITHOUT_PROXIES = 1
 NUMBER_OF_CONCURRENT_TASKS_WITH_PROXIES = 5000
 # in seconds (floating point)
-SLEEP_TIME = 3
+SLEEP_TIME = 2
 REQUEST_TIMEOUT = 10
 PROXY_API_URL = 'https://proxy.d3d.info/'
-# do not touch it! change NUMBER_OF_CONCURRENT_TASKS_WITHOUT_PROXIES and NUMBER_OF_CONCURRENT_TASKS_WITH_PROXIES
-NUMBER_OF_CONCURRENT_TASKS = None
 
 start_time = None
 tries = 0
@@ -86,14 +84,14 @@ async def main():
                     'model': 'proxy',
                     'method': 'get',
                     'order_by': 'response_time',
-                    'limit': NUMBER_OF_CONCURRENT_TASKS,
+                    'limit': NUMBER_OF_CONCURRENT_TASKS_WITH_PROXIES,
                 }
 
                 async with session.post(PROXY_API_URL, json=proxy_request) as resp:
                     proxies = (await resp.json())['data']
                     tasks = [try_to_search(session, proxy['address']) for proxy in proxies]
             else:
-                tasks = [try_to_search(session) for _ in range(NUMBER_OF_CONCURRENT_TASKS)]
+                tasks = [try_to_search(session) for _ in range(NUMBER_OF_CONCURRENT_TASKS_WITHOUT_PROXIES)]
 
             if tasks:
                 await asyncio.wait(tasks)
@@ -118,8 +116,5 @@ if __name__ == '__main__':
 
     use_proxies = command_line_args.use_proxies.lower() == 'true'
     eprint('Started with' + ('out' if not use_proxies else '') + ' proxies')
-
-    if NUMBER_OF_CONCURRENT_TASKS is None:
-        NUMBER_OF_CONCURRENT_TASKS = 1000 if use_proxies else 10
 
     asyncio.get_event_loop().run_until_complete(main())
