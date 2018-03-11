@@ -40,3 +40,5 @@ Errors are shown on the screen, you can redirect them like this:
 Also this program can work with proxies, just specify it:
 
 `python3 main.py --use-proxies true >> invites`
+
+Example of invites: https://pastebin.com/raw/hG86vmpD
