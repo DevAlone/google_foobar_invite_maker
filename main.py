@@ -18,6 +18,7 @@ NUMBER_OF_CONCURRENT_TASKS_WITH_PROXIES = 5000
 # in seconds (floating point)
 SLEEP_TIME = 3
 REQUEST_TIMEOUT = 20
+PROXY_API_URL = 'https://proxy.d3d.info/'
 # do not touch it! change NUMBER_OF_CONCURRENT_TASKS_WITHOUT_PROXIES and NUMBER_OF_CONCURRENT_TASKS_WITH_PROXIES
 NUMBER_OF_CONCURRENT_TASKS = None
 
@@ -88,7 +89,7 @@ async def main():
                     'limit': NUMBER_OF_CONCURRENT_TASKS,
                 }
 
-                async with session.post('https://proxy.d3d.info/', json=proxy_request) as resp:
+                async with session.post(PROXY_API_URL, json=proxy_request) as resp:
                     proxies = (await resp.json())['data']
                     tasks = [try_to_search(session, proxy['address']) for proxy in proxies]
             else:
