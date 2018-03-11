@@ -1,3 +1,5 @@
 env
 .idea
 .secret
+invites
+errors

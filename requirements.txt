@@ -1,2 +1,3 @@
-aiohttp
 fake_useragent
+aiohttp==2.3.2
+aiosocks==0.2.5
