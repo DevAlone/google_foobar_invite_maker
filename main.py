@@ -1,10 +1,9 @@
-import ssl
-
-import aiosocks
-import time
 from fake_useragent import UserAgent
 from aiosocks.connector import ProxyConnector, ProxyClientRequest
 
+import ssl
+import aiosocks
+import time
 import asyncio
 import aiohttp
 import argparse
