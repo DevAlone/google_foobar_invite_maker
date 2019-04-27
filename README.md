@@ -1,5 +1,7 @@
 # google_foobar_invite_maker
 
+UPD: seems that Google's doing some kind repairs on foobar.withgoogle.com and this program doesn't work so far
+
 Want to participate in Google's foobar challenge but don't have
 an invite? You're in the right place! This program provides about 20
 invites per minute without proxies(can be more, but risky to
