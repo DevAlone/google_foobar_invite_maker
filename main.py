@@ -40,6 +40,8 @@ async def try_to_search(session):
     try:
         async with session.get(url, headers=headers, timeout=REQUEST_TIMEOUT) as resp:
             resp_text = await resp.text()
+            if 'foobar' in resp_text.lower():
+                eprint('DEBUG: found foobar keyword')
 
             matches = re.search(r'(https?://(www.)?google.com/foobar/[^\"]+)', resp_text)
             if matches:
@@ -57,7 +59,7 @@ async def try_to_search(session):
             asyncio.TimeoutError,
             aiohttp.client_exceptions.ClientOSError,
             ssl.CertificateError) as ex:
-        eprint('Error during request. Proxy: {}. Exception: {}'.format(proxy, type(ex)))
+        eprint('Error during request. Proxy: {}. Exception: {}'.format(None, type(ex)))
 
     return False
 
