@@ -1,6 +1,7 @@
 # google_foobar_invite_maker
 
 UPD: seems that Google's doing some kind repairs on foobar.withgoogle.com and this program doesn't work so far
+UPD2: foobar itself started to work, but invites miner still doesn't work, maybe they've changed magic phrases to get an invitation
 
 Want to participate in Google's foobar challenge but don't have
 an invite? You're in the right place! This program provides about 20

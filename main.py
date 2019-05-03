@@ -42,6 +42,12 @@ async def try_to_search(session):
             resp_text = await resp.text()
             if 'foobar' in resp_text.lower():
                 eprint('DEBUG: found foobar keyword')
+            
+            if 'find.foo' in resp_text.lower():
+                eprint('DEBUG: found find.foo keyword')
+            
+            if 'find' in resp_text.lower():
+                eprint('DEBUG: found find keyword')
 
             matches = re.search(r'(https?://(www.)?google.com/foobar/[^\"]+)', resp_text)
             if matches:
