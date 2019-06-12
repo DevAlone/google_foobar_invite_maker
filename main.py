@@ -1,7 +1,6 @@
 from fake_useragent import UserAgent
 
 import ssl
-import aiosocks
 import time
 import asyncio
 import aiohttp
@@ -45,9 +44,6 @@ async def try_to_search(session):
             
             if 'find.foo' in resp_text.lower():
                 eprint('DEBUG: found find.foo keyword')
-            
-            if 'find' in resp_text.lower():
-                eprint('DEBUG: found find keyword')
 
             matches = re.search(r'(https?://(www.)?google.com/foobar/[^\"]+)', resp_text)
             if matches:
@@ -60,8 +56,6 @@ async def try_to_search(session):
             aiohttp.client_exceptions.ClientProxyConnectionError,
             aiohttp.client_exceptions.ClientResponseError,
             aiohttp.client_exceptions.ClientPayloadError,
-            aiosocks.errors.SocksError,
-            aiosocks.SocksError,
             asyncio.TimeoutError,
             aiohttp.client_exceptions.ClientOSError,
             ssl.CertificateError) as ex:
